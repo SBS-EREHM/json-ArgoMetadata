@@ -1,0 +1,63 @@
+{
+    "argo" :
+    [
+        {
+            "SENSOR":["FLUOROMETER_CHLA"],
+            "SENSOR_MAKER":["WETLABS"],
+            "SENSOR_MODEL":["MCOMS_FLBBCD"],
+            "SENSOR_SERIAL_NO":["0157"],
+            "SENSOR_FIRMWARE":["n/a"]
+        },
+        {
+            "PARAMETER": [
+                "FLUORESCENCE_CHLA",
+                "CHLA"
+            ],
+            "PARAMETER_SENSOR": [
+                "FLUOROMETER_CHLA",
+                "FLUOROMETER_CHLA"
+            ],
+            "PARAMETER_UNITS": [
+                "count",
+                "mg/m3"
+            ],
+            "PARAMETER_ACCURACY": [
+                null,
+                "0.08 mg/m3"
+            ],
+            "PARAMETER_RESOLUTION": [
+                null,
+                "0.025 mg/m3"
+            ]
+        },
+        {
+            "PREDEPLOYMENT_CALIB_EQUATION": [
+                null,
+                "CHLA = (FLUORESCENCE_CHLA – DARK_CHLA) * SCALE_CHLA"
+            ],
+            "PREDEPLOYMENT_CALIB_COEFFICIENT": [
+                null,
+                {
+                    "SCALE_CHLA":"1.891E-03",
+                    "DARK_CHLA":"51"
+                }
+            ],
+            "PREDEPLOYMENT_CALIB_COMMENT": [
+                "Uncalibrated chlorophyll-a fluorescence measurement",
+                "SBS FACTORY CALIBRATION"
+            ]
+        }
+    ],
+    "vendor" :
+    [
+        {
+            "SENSOR_MAKER": "WETLABS"
+        },
+        {
+            "PREDEPLOYMENT_CALIB_DATE": [
+                "2018-09-25",
+                "2018-09-25"
+            ]
+        }
+    ]
+}
