@@ -14,3 +14,19 @@ fclose(fid);
 % Decode JSON char string into struct
 % val.argo{1:3}, val.vendor{1:2}
 val = jsondecode(str);
+
+N_SENSOR = length(val.argo{1}.SENSOR);
+N_PARAM  = length(val.argo{2}.PARAMETER);
+
+fprintf('SENSOR:\n');
+for i = 1:N_SENSOR
+    fprintf('%s\n', val.argo{1}.SENSOR{i});
+end
+
+fprintf('\nPARAMETER:\n');
+for i = 1:N_PARAM
+    fprintf('%s\n', val.argo{2}.PARAMETER{i});
+end
+
+fprintf(1, '\nvendor\n');
+fprintf(1, '%s\n', val.vendor{1}.SENSOR_MAKER);
