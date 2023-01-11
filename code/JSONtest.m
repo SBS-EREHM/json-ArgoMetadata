@@ -1,4 +1,4 @@
-% function [val] = JSONread(fname)
+% function [val] = JSONtest(fname)
 
 % fname = 'sensor-DRUCK-DRUCK_2900PSIA-11698373.json';
 % fname = 'sensor-AANDERAA-AANDERAA_OPTODE_3830-498.json';
