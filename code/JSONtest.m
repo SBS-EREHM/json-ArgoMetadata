@@ -6,7 +6,7 @@
 fname = 'sensor-WETLABS-MCOMS_FLBBCDx-0157.json'; 
 
 % Read file as binary in one go and then convert to JSON char string 
-fid = fopen(fname); 
+fid = fopen(fullfile("examples",fname)); 
 raw = fread(fid,inf); 
 str = char(raw'); 
 fclose(fid); 
