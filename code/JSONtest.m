@@ -28,5 +28,5 @@ for i = 1:N_PARAM
     fprintf('%s\n', val.argo{2}.PARAMETER{i});
 end
 
-fprintf(1, '\nvendor\n');
+fprintf(1, '\nvendor:\n');
 fprintf(1, '%s\n', val.vendor{1}.SENSOR_MAKER);
