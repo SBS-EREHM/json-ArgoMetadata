@@ -82,7 +82,7 @@
     "vendor" :
     [
         {
-            "SENSOR_MAKER": "WETLABS"
+            "SENSOR_MAKER": "SBE"
         },
         {
             "PREDEPLOYMENT_CALIB_DATE": [
