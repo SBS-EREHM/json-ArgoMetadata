@@ -1,0 +1,95 @@
+{
+  "SENSORS": [
+    {
+      "SENSOR": "CTD_PRES",
+      "SENSOR_MAKER": "DRUCK",
+      "SENSOR_MODEL": "DRUCK_2900PSIA",
+      "SENSOR_SERIAL_NO": "11698373",
+      "SENSOR_FIRMWARE": " "
+    },
+    {
+      "SENSOR": "CTD_TEMP",
+      "SENSOR_MAKER": "SBE",
+      "SENSOR_MODEL": "SBE41CP",
+      "SENSOR_SERIAL_NO": "13875",
+      "SENSOR_FIRMWARE": " "
+    },
+    {
+      "SENSOR": "CTD_CNDC",
+      "SENSOR_MAKER": "SBE",
+      "SENSOR_MODEL": "SBE41CP",
+      "SENSOR_SERIAL_NO": "13875",
+      "SENSOR_FIRMWARE": " "
+    }
+  ],
+  "PARAMETERS": [
+    {
+      "PARAMETER": "PRES",
+      "PARAMETER_SENSOR": "CTD_PRES",
+      "PARAMETER_UNITS": "decibar",
+      "PARAMETER_ACCURACY": "2.4",
+      "PARAMETER_RESOLUTION": "0.1",
+      "PREDEPLOYMENT_CALIB_EQUATION": "y = thermistor_output; t = PTHA0 + PTHA1 * y + PTHA2 * y^2; x = pressure_output - PTCA0 - PTCA1 * t - PTCA2 * t^2; n = x * PTCB0 / (PTCB0 + PTCB1 * t + PTCB2 * t^2); pressure = PA0 + PA1 * n + PA2 * n^2;",
+      "PREDEPLOYMENT_CALIB_COEFFICIENT": "     PA0 = -9.688915E-01,     PA1 =  1.403562E-01,     PA2 = -4.016801E-08,   PTCA0 =  3.569194E+01,   PTCA1 = -3.100399E-01,   PTCA2 =  4.930107E-04,   PTCB0 =  2.519888E+01,   PTCB1 = -6.250000E-04,   PTCB2 =  0.000000E+00,   PTHA0 = -7.086474E+01,   PTHA1 =  5.159523E-02,   PTHA2 = -5.051388E-07,  POFFSET =  0.000000E+0,",
+      "PREDEPLOYMENT_CALIB_COEFFICIENTS": {
+        "PA0": " -1.860485e-001",
+        "PA1": " 3.913091e-004",
+        "PA2": "-2.833018e-013",
+        "PTCA0": "6.794577e+003",
+        "PTCA1": "-9.846636e+000",
+        "PTCA2": "-6.839699e-001",
+        "PTCB0": "3.203647e+005",
+        "PTCB1": "2.935842e+001",
+        "PTCB2": "-5.287902e-001",
+        "PTHA0": "-8.015838e+001",
+        "PTHA1": "4.998022e-002",
+        "PTHA2": "-4.733751e-007"
+      },
+      "PREDEPLOYMENT_CALIB_COMMENT": "Pressure Calibration Date              2021-03-31",
+      "PREDEPLOYMENT_CALIB_DATE": "2021-03-31"
+    },
+    {
+      "PARAMETER": "TEMP",
+      "PARAMETER_SENSOR": "CTD_TEMP",
+      "PARAMETER_UNITS": "degree_Celsius",
+      "PARAMETER_ACCURACY": "0.002",
+      "PARAMETER_RESOLUTION": "0.001",
+      "PREDEPLOYMENT_CALIB_EQUATION": "Temperature ITS-90 = 1/{a0 + a1[ln(n)] + a2[ln(n)^2] + a3[ln(n)^2]} - 273.15; n = instrument output;",
+      "PREDEPLOYMENT_CALIB_COEFFICIENT": "     TA0 =  -8.716632e-004,     TA1 =  2.937892e-004,     TA2 = -3.758125e-006,     TA3 =  1.520066e-007,",
+      "PREDEPLOYMENT_CALIB_COEFFICIENTS": {
+        "a0": "-8.716632e-004",
+        "a1": " 2.937892e-004",
+        "a2": "-3.758125e-006",
+        "a3": " 1.520066e-007"
+      },
+      "PREDEPLOYMENT_CALIB_COMMENT": "Temperature Calibration Date           2021-03-31",
+      "PREDEPLOYMENT_CALIB_DATE": "2021-03-31"
+    },
+    {
+      "PARAMETER": "PSAL",
+      "PARAMETER_SENSOR": "CTD_CNDC",
+      "PARAMETER_UNITS": "psu",
+      "PARAMETER_ACCURACY": "0.005",
+      "PARAMETER_RESOLUTION": "0.001",
+      "PREDEPLOYMENT_CALIB_EQUATION": "f=INST_FREQ*sqrt(1.0+wBOTC*t)/1000.0;Conductivity=(g+h*f^2+i*f^3+j*f^4)/(1+delta*t+epsilon*p) Siemens/meter;t=temperature[degC];p=pressure[dbar];delta=CTcor;epsilon=CPcor;         ",
+      "PREDEPLOYMENT_CALIB_COEFFICIENT": "       g = -1.023943e+000,       h =  1.465505e-001,       i = 2.806563e-004,       j =  4.044779e-005,   CPcor = -9.570001E-08,   CTcor =  3.250000E-06,   WBOTC =  3.1475e-008,       ",
+      "PREDEPLOYMENT_CALIB_COEFFICIENTS": {
+        "g": "-1.023943e+000",
+        "h": " 1.465505e-001",
+        "i": "-2.806563e-004",
+        "j": " 4.044779e-005",
+        "CPcor": "-9.5700e-008",
+        "CTcor": "3.2500e-006",
+        "WBOTC": " 3.1475e-008"
+      },
+      "PREDEPLOYMENT_CALIB_COMMENT": "Conductivity Calibration Date          2021-03-31",
+      "PREDEPLOYMENT_CALIB_DATE": "2021-03-31"
+    }
+  ],
+  "info": {
+    "created_by": "BAK test",
+    "creation_date": "2023-01-24 08:32:39",
+    "contents": "json file to describe a sensor for Argo. v0.1 draft",
+    "sensor_described": "SBE-SBE41CP-11643"
+  }
+}

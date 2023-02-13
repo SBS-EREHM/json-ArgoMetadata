@@ -1,0 +1,28 @@
+{
+  "platform_info": {
+    "created_by": "BAK test",
+    "date_creation": "20230203074154",
+    "format_version": "0.1",
+    "contents": "json file to describe a platform for Argo",
+    "platform_described": "SBE-NAVIS_EBR-1101"
+  },
+  "PLATFORMS": {
+    "DATA_TYPE": "Argo meta-data",
+    "POSITIONING_SYSTEM": "GPS",
+    "PLATFORM_FAMILY": "FLOAT",
+    "PLATFORM_TYPE": "NAVIS_EBR",
+    "PLATFORM_MAKER": "SBE",
+    "FIRMWARE_VERSION": "BGCi_OPTOx_MCOM_SUNA_PH_ICE_EXP 210521",
+    "FLOAT_SERIAL_NO": "1101",
+    "WMO_INST_TYPE": "863",
+    "BATTERY_TYPE": "ELECTROCHEM Lithium 15.0 V",
+    "BATTERY_PACKS": "3DD Li",
+    "CONTROLLER_BOARD_TYPE_PRIMARY": "NAVIS N1",
+    "CONTROLLER_BOARD_SERIAL_NO_PRIMARY": "00000",
+    "CONTROLLER_BOARD_TYPE_SECONDARY": " ",
+    "CONTROLLER_BOARD_SERIAL_NO_SECONDARY": " ",
+    "platform_vendorinfo": {
+      "example": "Vendors can add their own platform info here; they can add any field they like as a fieldname below platform_vendorinfo"
+    }
+  }
+}
