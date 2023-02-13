@@ -1,12 +1,21 @@
 {
-    "argo" :
-    [
+    "argo": [
         {
-            "SENSOR":["FLUOROMETER_CHLA"],
-            "SENSOR_MAKER":["WETLABS"],
-            "SENSOR_MODEL":["MCOMS_FLBBCD"],
-            "SENSOR_SERIAL_NO":["0157"],
-            "SENSOR_FIRMWARE":["n/a"]
+            "SENSOR": [
+                "FLUOROMETER_CHLA"
+            ],
+            "SENSOR_MAKER": [
+                "WETLABS"
+            ],
+            "SENSOR_MODEL": [
+                "MCOMS_FLBBCD"
+            ],
+            "SENSOR_SERIAL_NO": [
+                "0157"
+            ],
+            "SENSOR_FIRMWARE": [
+                "n/a"
+            ]
         },
         {
             "PARAMETER": [
@@ -38,8 +47,8 @@
             "PREDEPLOYMENT_CALIB_COEFFICIENT": [
                 null,
                 {
-                    "SCALE_CHLA":"1.891E-03",
-                    "DARK_CHLA":"51"
+                    "SCALE_CHLA": "1.891E-03",
+                    "DARK_CHLA": "51"
                 }
             ],
             "PREDEPLOYMENT_CALIB_COMMENT": [
@@ -48,8 +57,7 @@
             ]
         }
     ],
-    "vendor" :
-    [
+    "vendor": [
         {
             "SENSOR_MAKER": "WETLABS"
         },
