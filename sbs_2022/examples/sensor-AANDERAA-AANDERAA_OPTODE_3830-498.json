@@ -1,0 +1,111 @@
+{
+    "argo": [
+        {
+            "SENSOR": [
+                "OPTODE_DOXY"
+            ],
+            "SENSOR_MAKER": [
+                "AANDERAA"
+            ],
+            "SENSOR_MODEL": [
+                "ANDERRAA_OPTOODE_3830"
+            ],
+            "SENSOR_SERIAL_NO": [
+                "498"
+            ],
+            "SENSOR_FIRMWARE": [
+                "n/a"
+            ]
+        },
+        {
+            "PARAMETER": [
+                "DOXY",
+                "MOLAR_DOXY",
+                "TEMP_DOXY"
+            ],
+            "PARAMETER_SENSOR": [
+                "OPTODE_DOXY",
+                "OPTODE_DOXY",
+                "OPTODE_DOXY"
+            ],
+            "PARAMETER_UNITS": [
+                "micromole/kg",
+                "micromole/L",
+                "degree_Celsius"
+            ],
+            "PARAMETER_ACCURACY": [
+                "8micromole/L or 5%",
+                "8micromole/L or 5%",
+                "0.05"
+            ],
+            "PARAMETER_RESOLUTION": [
+                "1 micromole/L",
+                "1 micromole/L",
+                "0.01"
+            ]
+        },
+        {
+            "PREDEPLOYMENT_CALIB_EQUATION": [
+                "O2c= MOLAR_DOXY exp[ (PSAL-Sref) (B0+B1Ts+B2Ts^2+B3Ts^3)+C0(PSAL^2-Sref^2)]; DO=O2c [1+ Pcoef * PRES/1000]; Ts=ln[(298.15-TEMP)/(273.15+TEMP)]; DOXY[micromole/kg]=DO / rho0 ; rho0= potential density [kg/L] calculated from CTD data",
+                "O2=C0+C1.P+C2.P^2+C3.P^3+C4.P^4 with Ci=Ci0+Ci1.T+Ci2.T^2+Ci3.T^3; MOLAR_DOXY=O2 exp[ S*(B0+B1*Ts+B2*Ts^2+B3*Ts^3)+C0*S^2]; Ts=ln[(298.15-T)/(273.15+T)]; with P=DPHASE, T=TEMP_DOXY, S=Sref",
+                "TEMP_DOXY=T0+T1*RawTemp+T2*RawTemp^2+T3*RawTemp^3; with RawTemp=voltage from thermistor bridge (mV)"
+            ],
+            "PREDEPLOYMENT_CALIB_COEFFICIENT": [
+                {
+                    "P0": "2.364970e+00",
+                    "P1": "1.030460e+00",
+                    "P2": ".000000e+00",
+                    "P3": ".000000e+00",
+                    "C00": "3.754080e+03",
+                    "C01": "-1.288640e+02",
+                    "C02": "2.729120e+00",
+                    "C03": "-2.521600e-02",
+                    "C10": "=-2.382300e+02",
+                    "C11": "7.215190e+00",
+                    "C12": "-1.569020e-01",
+                    "C13": "1.558380e-03",
+                    "C20": "6.195940e+00",
+                    "C21": "-1.647470e-01",
+                    "C22": "3.867400e-03",
+                    "C23": "-4.307700e-05",
+                    "C30": "-7.572050e-02",
+                    "C31": "1.784660e-03",
+                    "C32": "-4.783790e-05",
+                    "C33": "=6.072440e-07",
+                    "C40": "3.553800e-04",
+                    "C41": "-7.528320e-06",
+                    "C42": "2.410080e-07",
+                    "C43": "3.442240e-09",
+                    "Sref": "35",
+                    "B0": "-6.24097e-3",
+                    "B1": "-6.93498e-3",
+                    "B2": "-6.90358e-3",
+                    "B3": "-4.29155e-3",
+                    "C0": "-3.11680e-7",
+                    "Pcoef": "0.32",
+                    "T0": "1.961240e+01",
+                    "T1": "-3.029530e-02",
+                    "T2": "2.887060e-06",
+                    "T3": "-4.249640e-09"
+                }
+            ],
+            "PREDEPLOYMENT_CALIB_COMMENT": [
+                "see TD218 operating manual oxygen optode 3830, 3835, 3930, 3975, 4130, 4175; Calibrated on 22/Sep/2004",
+                null,
+                "optode temperature, see TD218 operating manual oxygen optode 3830, 3835, 3930, 3975, 4130, 4175; Calibrated on 22/Sep/2004"
+            ]
+        }
+    ],
+    "vendor": [
+        {
+            "SENSOR_MAKER": "AANDERAA"
+        },
+        {
+            "PREDEPLOYMENT_CALIB_DATE": [
+                "2004-09-22",
+                null,
+                "2004-09-22"
+            ]
+        }
+    ]
+}
