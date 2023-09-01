@@ -1,7 +1,7 @@
 # json-ArgoMetadata
 
 Metadata schema and examples for describing sensor and float metadata by vendors to Argo float customers.
-Follows Argo sensor, paramater, and configuration schemes as well as identifying NVS controlled vocabulary terms using their ID (e.g., [SDN:R25::FLUOROMETER_CHLA]([url](http://vocab.nerc.ac.uk/collection/R25/current/FLUOROMETER_CHLA/)))
+Follows Argo sensor, paramater, and configuration schemes as well as identifying NVS controlled vocabulary terms using their ID (e.g., [SDN:R25::FLUOROMETER_CHLA](http://vocab.nerc.ac.uk/collection/R25/current/FLUOROMETER_CHLA/))
 
 | Directory | Description|
 | --- | --- |
