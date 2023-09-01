@@ -9,3 +9,4 @@ Follows Argo sensor, paramater, and configuration schemes as well as identifying
 | **examples** | Schema-compliant examples for numerous sensors|
 | **schema** | JSON schema for sensors (and tbs floats).  Needed by validating JSON parsers.|
 
+Current effort involves SBS-EREHM (Eric Rehm, Sea-Bird Scientific) and BAK (Brian King, NOC)
