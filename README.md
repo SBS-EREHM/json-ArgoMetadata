@@ -7,5 +7,5 @@ Follows Argo sensor, paramater, and configuration schemes as well as identifying
 | --- | --- |
 | **code** | Demonstration Python code to validate and parse JSON sensor metadata instances againt the schema as well as validate controlled vocabulary terms using NVS server REST API.|
 | **examples** | Schema-compliant examples for numerous sensors|
-| **schema** | JSON schema for sensors (and tbs floats).  Need by validating parsers.|
+| **schema** | JSON schema for sensors (and tbs floats).  Needed by validating JSON parsers.|
 
