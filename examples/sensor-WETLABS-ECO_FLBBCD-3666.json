@@ -2,6 +2,7 @@
     "sensor_info": {
       "created_by": "ECR test",
       "date_creation": "2023-04-10T07:38:07-07:00",
+      "link" : "./argo.sensor.schema.json",
       "format_version": "0.2.0",
       "contents": "json file to describe an ECO sensor FLBBCDREM-3666 for sensor schema v0.2.0 draft",
       "sensor_described": "WETLABS-ECO_FLBBCD-3666"
@@ -103,8 +104,8 @@
         "PARAMETER_RESOLUTION": "0.025 mg/m3",
         "PREDEPLOYMENT_CALIB_EQUATION": "CHLA = (FLUORESCENCE_CHLA – DARK_CHLA) * SCALE_CHLA",
         "PREDEPLOYMENT_CALIB_COEFFICIENT_LIST": { 
-            "SCALE_CHLA":"0.0066",
-            "DARK_CHLA":"44"
+            "SCALE_CHLA": "0.0066",
+            "DARK_CHLA": 44
         },
         "PREDEPLOYMENT_CALIB_COMMENT": "SBS FACTORY CALIBRATION, 2018-09-25",
         "PREDEPLOYMENT_CALIB_DATE": "2018-09-25"

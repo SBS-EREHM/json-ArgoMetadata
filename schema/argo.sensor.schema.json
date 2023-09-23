@@ -16,6 +16,9 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "link": {
+                    "const" : "./argo.sensor.schema.json"
+                },
                 "format_version": {
                     "$ref": "#/format_version"
                 },
@@ -29,6 +32,7 @@
             "required": [
                 "created_by",
                 "date_creation",
+                "link",
                 "format_version",
                 "contents",
                 "sensor_described"
