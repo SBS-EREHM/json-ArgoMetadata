@@ -177,6 +177,61 @@
                     }
                 }
             ]
+        },
+        
+        "platform_vendorinfo": {
+            "type": "object",
+            "properties": {
+                "vendor_schema": {
+                    "type": "string",
+                    "enum": [
+                        "None",
+                        "SBE",
+                        "MRV"
+                    ],
+                    "default": "None"
+                },
+                "version" : {"type" : "string"}
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {"vendor_schema": {"const": "None"}}
+                    },
+                    "then": {
+                        "additionalProperties": {
+                            "__comment__": {
+                                "description": "instrument_vendorinfo is optional. When vendor_schema is unspecified or None, content is uncontrolled",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": { "vendor_schema": { "const": "SBE" } },
+                        "required": [ "vendor_schema"]
+                    },
+                    "then": { 
+                        "$ref": "./argo.SBE.schema.json#/$defs/platform_vendorinfo"
+                    }
+                },
+
+                {
+                    "if": {
+                        "properties": { "vendor_schema": { "const": "MRV" }},
+                        "required": [ "vendor_schema"]
+                    },
+                    "then": {
+                        "$ref": "./argo.MRV.schema.json#/$defs/platform_vendorinfo"
+                    }
+                }
+
+
+
+            ]
         }                            
+
+
     }
 }

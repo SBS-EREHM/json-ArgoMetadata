@@ -15,6 +15,16 @@
                     "type": "string",
                     "format": "date"
                 },
+                "SBE_ISFET_SERIAL_NO": {
+                    "type": "string"
+                },
+                "SBE_REFERENCE_SERIAL_NO": {
+                    "type": "string"
+                },
+                "SBE_pHType": {
+                    "type": "string",
+                    "enum" : ["Float", "Deep", "LOV", "Stem,", "Glider pH"]
+                },
                 "CONFIG_EcoCdomFluorescenceExcitationWavelength_nm": {
                     "type": "number",
                     "const": 370
@@ -187,6 +197,7 @@
         },
         "parameter_vendorinfo": {
             "type": "object",
+            "version" : {"$ref": "#/version"},
             "properties": {
                 "vendor_schema" : true,
                 "version" : {"$ref": "#/version"},
@@ -202,14 +213,17 @@
         },
         "predeployment_vendorinfo": {
             "type": "object",
+            "version" : {"$ref": "#/version"},
             "properties": {
                 "vendor_schema" : true,
                 "version" : {"$ref": "#/version"},
-                "SBE_optional5": {
-                    "type": "number"
+                "PREDEPLOYMENT_SEAFET_K0_CALIB_DATE": {
+                    "type": "string",
+                    "format": "date"
                 },
-                "SBE_optional6": {
-                    "type": "string"
+                "PREDEPLOYMENT_SEAFET_K2_CALIB_DATE": {
+                    "type": "string",
+                    "format": "date"
                 }
             },
             "required" : ["vendor_schema", "version"],
@@ -217,19 +231,38 @@
         },
         "instrument_vendorinfo": {
             "type": "object",
+            "version" : {"$ref": "#/version"},
             "properties": {
                 "vendor_schema" : true,
                 "version" : {"$ref": "#/version"},
-                "SBE_foo7": {
+                "SBE_optional7": {
                     "type": "number"
                 },
-                "SBE_foo8": {
+                "SBE_optional8": {
                     "type": "string"
                 }
             },
             "required" : ["vendor_schema", "version"],
             "additionalProperties" : false
+        },
+        "platform_vendorinfo": {
+            "type": "object",
+            "version" : {"$ref": "#/version"},
+            "properties": {
+                "vendor_schema" : true,
+                "version" : {"$ref": "#/version"},
+                "SBE_manufacturing_date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "SBE_optional9": {
+                    "type": "string"
+                }
+            },
+            "required" : ["vendor_schema", "version", "SBE_manufacturing_date"],
+            "additionalProperties" : false
         }
+
 
     }
 }
