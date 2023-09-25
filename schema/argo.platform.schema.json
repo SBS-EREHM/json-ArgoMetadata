@@ -132,7 +132,7 @@
                 },
                 "BATTERY_TYPE": {
                     "type": "string",
-                    "pattern" : "(?i)^\\s*\\w+\\s+(?:Alkaline|Lithium)\\s+\\d+(?:\\.\\d+)?\\s*V(?:\\s*\\+\\s*\\w+\\s+(?:Alkaline|Lithium)\\s+\\d+(?:\\.\\d+)?\\s*V)*$",
+                    "pattern" : "(?i)^(?:\\s*\\w+\\s+)?(?:Alkaline|Lithium)\\s+\\d+(?:\\.\\d+)?\\s*V(?:\\s*\\+\\s*\\w+\\s+(?:Alkaline|Lithium)\\s+\\d+(?:\\.\\d+)?\\s*V)*$",
                     "description": "Describes the type of battery packs in the float. BATTERY_TYPE = 'Manufacturer Alkaline x V' or 'Manufacturer Lithium x V + Manufacturer Alkaline x V, e.g.,ELECTROCHEM Lithium 15 V"
                 },
                 "BATTERY_PACKS": {
