@@ -211,13 +211,13 @@ def main():
         # Quick and dirty check against Argo metadta sections with NVS controlled vocabularies.
         if 'SENSORS' in data :
             if nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) :
-                print("All controlled terms in SENSORS are valid")        # if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
+                print("All controlled terms in SENSORS are valid")
             else:
                 print("One or more controlled terms in SENSRare invalid or could not be resolved")
 
         if 'PARAMETERS' in data :                         
             if nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR']) :
-                print("All controlled terms in PARAMETERS are valid")        # if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
+                print("All controlled terms in PARAMETERS are valid") 
             #     nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR'])) :
             #     print("All controlled terms are valid")
             else:
@@ -225,9 +225,7 @@ def main():
 
         if 'PLATFORM' in data :                         
             if nvs.validate("/PLATFORM", ["DATA_TYPE", "POSITIONING_SYSTEM",  "TRANS_SYSTEM",  "PLATFORM_FAMILY", "PLATFORM_TYPE", "PLATFORM_MAKER",  "WMO_INST_TYPE",  "CONTROLLER_BOARD_TYPE_PRIMARY",  "CONTROLLER_BOARD_TYPE_SECONDARY"]) :
-                print("All controlled terms in PLATFROM are valid")        # if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
-            #     nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR'])) :
-            #     print("All controlled terms are valid")
+                print("All controlled terms in PLATFROM are valid")
             else:
                 print("One or more controlled terms in PLATFORM are invalid or could not be resolved")
 
