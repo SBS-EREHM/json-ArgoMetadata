@@ -176,14 +176,22 @@ def main():
     # Load JSON sensor instance data and main schema
     data_dir = Path.cwd() 
     fpath = data_dir / Path(fname)
+    try :
+        data = load_json(fpath)
+    except Exception as error:
+        print(error)
+        exit()
     print(fpath)
-    data = load_json(fpath)
 
     schema_dir = Path.cwd() / Path('schema')
     schema_type = fpath.name.split('-')[0]
     schema_path = schema_dir / Path('argo.'+f'{schema_type}'+'.schema.json')
-    main_schema = load_json(schema_path)
-
+    try: 
+        main_schema = load_json(schema_path)
+    except Exception as error:
+        print(error)
+        exit()
+    print(schema_path)
     
     # main_schema = load_json(schema_dir / Path('argo.platform.schema.json'))
 
