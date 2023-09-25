@@ -122,10 +122,15 @@ class NVS :
     def validate(self, jpointer, variables) :
         '''Validate terms of Sensors or Parameters variables'''
 
-        # Note that we do not all variables / properties for each sensor/parameter
+        # Note that not all variables / properties for each sensor/parameter/platform
         # have a controlled vocabulary.  That's why we pass in the "variables".
 
         sensors = JsonPointer(jpointer).get(self.data)
+
+        # sensors and parameters are a list *multiple sensors / parameters per instrument .  platform is not, so make it one.
+        if type(sensors) is not list:
+            sensors = [sensors]
+
         N = len(variables)*len(sensors)
         sensorValid = 0
 
@@ -134,8 +139,14 @@ class NVS :
 
             for var in variables :
                 try :
-                    sensorTermUri = sensor[var]
-                    sensorValid = sensorValid + self.validateTerm(sensorTermUri)
+                    if var in sensor :
+                        # terms may or may not be a list.  If not, make it one.
+                        sensorTermList = sensor[var]
+                        if type(sensorTermList) is not list :
+                            sensorTermList = [sensorTermList]
+                        for sensorTermUri in sensorTermList :
+                            sensorValid = sensorValid + self.validateTerm(sensorTermUri)
+                        N = N + len(sensorTermList) -1
                 except Exception as error:
                     print(error)
                     return False
@@ -159,15 +170,22 @@ def main():
         # fname = 'examples/sensor-AANDERAA-AANDERAA_OPTODE_4330-3901.json'
         # fname = 'examples/sensor-SATLANTIC-SUNA-1527.json'
         # fname = 'examples/sensor-WETLABS-ECO_FLBBCD-3666.json'
-        fname = 'examples/sensor-SBE-SEAFET-11341.json'
+        # fname = 'examples/sensor-SBE-SEAFET-11341.json'
+        fname = 'examples/platform-SBE-NAVIS_EBR-1101.json'
         
     # Load JSON sensor instance data and main schema
     data_dir = Path.cwd() 
-    print(data_dir / Path(fname))
-    data = load_json(data_dir / Path(fname))
+    fpath = data_dir / Path(fname)
+    print(fpath)
+    data = load_json(fpath)
 
     schema_dir = Path.cwd() / Path('schema')
-    main_schema = load_json(schema_dir / Path('argo.sensor.schema.json'))
+    schema_type = fpath.name.split('-')[0]
+    schema_path = schema_dir / Path('argo.'+f'{schema_type}'+'.schema.json')
+    main_schema = load_json(schema_path)
+
+    
+    # main_schema = load_json(schema_dir / Path('argo.platform.schema.json'))
 
     # Resolve references ($ref) in the main and sub schemas
     # The main schema may reference subschemas, etc.
@@ -181,7 +199,7 @@ def main():
         for error in validation_errors:
             print(error)
     else:
-        print("Data is valid.")
+        print("JSON instance is valid.")
         # If the data is valid, you can pretty print it.
         pretty_data = json.dumps(data, indent=4)
         # print("Parsed data:\n", pretty_data)
@@ -189,12 +207,29 @@ def main():
         # Validate the JSON entries that have NVS controlled vocabularies
         # Use json pointer notation, e.g., /SENSORS/SENSOR, /SENSORS/SENSOR_MAKER, ...
         nvs = NVS(data, clearCache = False)
-        if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
-            nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR'])) :
-            print("All controlled terms are valid")
-        else:
-            print("One or more controlled terms are invalid or could not be resolved")
 
+        # Quick and dirty check against Argo metadta sections with NVS controlled vocabularies.
+        if 'SENSORS' in data :
+            if nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) :
+                print("All controlled terms in SENSORS are valid")        # if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
+            else:
+                print("One or more controlled terms in SENSRare invalid or could not be resolved")
+
+        if 'PARAMETERS' in data :                         
+            if nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR']) :
+                print("All controlled terms in PARAMETERS are valid")        # if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
+            #     nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR'])) :
+            #     print("All controlled terms are valid")
+            else:
+                print("One or more controlled terms in PARAMETERS are invalid or could not be resolved")
+
+        if 'PLATFORM' in data :                         
+            if nvs.validate("/PLATFORM", ["DATA_TYPE", "POSITIONING_SYSTEM",  "TRANS_SYSTEM",  "PLATFORM_FAMILY", "PLATFORM_TYPE", "PLATFORM_MAKER",  "WMO_INST_TYPE",  "CONTROLLER_BOARD_TYPE_PRIMARY",  "CONTROLLER_BOARD_TYPE_SECONDARY"]) :
+                print("All controlled terms in PLATFROM are valid")        # if (nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) & 
+            #     nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR'])) :
+            #     print("All controlled terms are valid")
+            else:
+                print("One or more controlled terms in PLATFORM are invalid or could not be resolved")
 
 if __name__ == "__main__":
     main()
