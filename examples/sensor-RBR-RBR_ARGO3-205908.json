@@ -85,11 +85,12 @@
       "PREDEPLOYMENT_CALIB_DATE": "2020-12-02",
       "parameter_vendorinfo": {
         "vendor_schema" : "None",
-        "example": "Vendors can add their own parameter info here; they can add any field they like as a fieldname below parameter_vendorinfo"
+        "example": "Vendors can add their own predeployment info here; they can add any field they like as a fieldname below predeployment_vendorinfo"
       },
       "predeployment_vendorinfo": {
-        "vendor_schema" : "None",
-        "example": "Vendors can add their own predeployment info here; they can add any field they like as a fieldname below predeployment_vendorinfo"
+        "vendor_schema" : "RBR",
+        "version" : "0.1",
+        "certificate" : "https://oem-lookup.rbr-global.com/api/v1/instruments/205908/channels/8/certificate"
       }
     },
     {

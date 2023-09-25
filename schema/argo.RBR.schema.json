@@ -3,6 +3,7 @@
     "$id": "http://schema.nerc.ac.uk/schemas/sensor/0.1.0/argo.RBR.schema.json",
     "title": "JSON Schema for Argo Program Sensors",
     "description": "A JSON Schema used to populate Argo float sensor and parameter metadata elements specific to RBR.  ",
+    "version" : {"const" : "0.1"},
     "type": "object",
     "$defs": {
         "sensor_vendorinfo": {
@@ -39,13 +40,13 @@
             "properties": {
                 "vendor_schema" : true,
                 "version" : true,
-                "RBR_foo5": {
-                    "type": "number"
-                },
-                "RBR_foo6": {
-                    "type": "string"
+                "certificate": {
+                    "type" : "string",
+                    "format": "uri",
+                    "desription" : "Link to calibration certificate"
                 }
             },
+            "required" : ["certificate"],
             "additionalProperties" : false
         },
         "instrument_vendorinfo": {

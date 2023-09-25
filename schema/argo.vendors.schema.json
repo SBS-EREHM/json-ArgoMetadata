@@ -109,6 +109,7 @@
                     "type": "string",
                     "enum": [
                         "None",
+                        "RBR",
                         "SBE"
                     ],
                     "default": "None"
@@ -131,6 +132,15 @@
                 },
                 {
                     "if": {
+                        "properties": { "vendor_schema": { "const": "RBR" } },
+                        "required": [ "vendor_schema"]
+                    },
+                    "then": { 
+                        "$ref": "./argo.RBR.schema.json#/$defs/predeployment_vendorinfo"
+                    }
+                },
+                {
+                    "if": {
                         "properties": { "vendor_schema": { "const": "SBE" } },
                         "required": [ "vendor_schema"]
                     },
@@ -138,6 +148,7 @@
                         "$ref": "./argo.SBE.schema.json#/$defs/predeployment_vendorinfo"
                     }
                 }
+
             ]
         },
         "instrument_vendorinfo": {
