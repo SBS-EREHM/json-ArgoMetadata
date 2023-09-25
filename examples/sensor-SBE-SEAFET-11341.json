@@ -5,7 +5,7 @@
       "link" : "./argo.sensor.schema.json",
       "format_version": "0.2.0",
       "contents": "json file to describe an SBS-SEAFET on float 5906970 for sensor schema v0.2.0 draft",
-      "sensor_described": "SBS-SEAFET-11341 on float 5906970"
+      "sensor_described": "SBE-SEAFET-11341 on float 5906970"
     },
     "@context": {
       "SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",
@@ -80,16 +80,16 @@
         "PARAMETER_RESOLUTION": "0.0004",
         "PREDEPLOYMENT_CALIB_EQUATION": "k0T=k0+k2*TEMP; pcorr=f1*PRES+f2*PRES^2+f3*PRES^3+f4*PRES^4+f5*PRES^5+f6*PRES^6; k0TP=k0T+pcorr; Tk=273.15+TEMP; Cltotal=(0.99889/35.453*PSAL/1.80655)/(1-0.001005*PSAL); ADH=3.4286e-6*TEMP^2+6.7524e-4*TEMP+0.49172143; IonS=19.924*PSAL/(1000-1.005*PSAL); log10gammaHCl=[-ADH*sqrt(IonS)/(1+1.394*sqrt(IonS))]+[(0.08885-0.000111*TEMP)*IonS]; deltaVHCl=17.85+0.1044*TEMP-0.001316*TEMP^2; log10gammaHCLtP=log10gammaHCl+[deltaVHCl*(PRES/10)/(R*Tk*ln(10))/2/10]; PH_IN_SITU_FREE=[(VRS_PH-k0TP)/(R*Tk/F*ln(10))]+[ln(Cltotal)/ln(10)]+2*log10gammaHCLtP-log10(1-0.001005*PSAL)",
         "PREDEPLOYMENT_CALIB_COEFFICIENT_LIST": { 
-          "R": 8.31446,
-          "F": 96485,
-          "k0": -1.2887, 
-          "k2": -0.00086382,
-          "f1": 5.1387e-06, 
-          "f2": -7.0528e-09, 
-          "f3": 5.8452e-12, 
-          "f4": -2.5259e-15, 
-          "f5": 5.5432e-19, 
-          "f6": -4.8087e-23   
+          "R": "8.31446",
+          "F": "96485",
+          "k0": "-1.2887", 
+          "k2": "-0.00086382",
+          "f1": "5.1387e-06", 
+          "f2": "-7.0528e-09", 
+          "f3": "5.8452e-12", 
+          "f4": "-2.5259e-15", 
+          "f5": "5.5432e-19", 
+          "f6": "-4.8087e-23"   
         },
         "PREDEPLOYMENT_CALIB_COMMENT": "",
         "PREDEPLOYMENT_CALIB_DATE": "2020-12-17",
@@ -108,16 +108,16 @@
         "PARAMETER_RESOLUTION": "0.0004",
         "PREDEPLOYMENT_CALIB_EQUATION": "k0T=k0+k2*TEMP; pcorr=f1*PRES+f2*PRES^2+f3*PRES^3+f4*PRES^4+f5*PRES^5+f6*PRES^6; k0TP=k0T+pcorr; Tk=273.15+TEMP; Cltotal=(0.99889/35.453*PSAL/1.80655)/(1-0.001005*PSAL); ADH=3.4286e-6*TEMP^2+6.7524e-4*TEMP+0.49172143; IonS=19.924*PSAL/(1000-1.005*PSAL); log10gammaHCl=[-ADH*sqrt(IonS)/(1+1.394*sqrt(IonS))]+[(0.08885-0.000111*TEMP)*IonS]; deltaVHCl=17.85+0.1044*TEMP-0.001316*TEMP^2; log10gammaHCLtP=log10gammaHCl+[deltaVHCl*(PRES/10)/(R*Tk*ln(10))/2/10]; PH_IN_SITU_FREE=[(VRS_PH-k0TP)/(R*Tk/F*ln(10))]+[ln(Cltotal)/ln(10)]+2*log10gammaHCLtP-log10(1-0.001005*PSAL)",
         "PREDEPLOYMENT_CALIB_COEFFICIENT_LIST": {  
-          "R": 8.31446,
-          "F": 96485,
-          "k0": -1.2887, 
-          "k2": -0.00086382,
-          "f1": 5.1387e-06, 
-          "f2": -7.0528e-09, 
-          "f3": 5.8452e-12, 
-          "f4": -2.5259e-15, 
-          "f5": 5.5432e-19, 
-          "f6": -4.8087e-23   
+          "R": "8.31446",
+          "F": "96485",
+          "k0": "-1.2887", 
+          "k2": "-0.00086382",
+          "f1": "5.1387e-06", 
+          "f2": "-7.0528e-09", 
+          "f3": "5.8452e-12", 
+          "f4": "-2.5259e-15", 
+          "f5": "5.5432e-19", 
+          "f6": "-4.8087e-23"   
         },
         "PREDEPLOYMENT_CALIB_COMMENT": "",
         "PREDEPLOYMENT_CALIB_DATE": "2020-12-17",

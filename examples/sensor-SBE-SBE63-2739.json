@@ -5,7 +5,7 @@
       "link" : "./argo.sensor.schema.json",
       "format_version": "0.2.0",
       "contents": "json file to describe an SBE63 Optode on float 5906509 for sensor schema v0.2.0 draft",
-      "sensor_described": "SBS-SBE63_OPTOPDE-2739"
+      "sensor_described": "SBE-SBE63_OPTOPDE-2739"
     },
     "@context": {
       "SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",

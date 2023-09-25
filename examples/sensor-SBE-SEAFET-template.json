@@ -5,7 +5,7 @@
       "link" : "./argo.sensor.schema.json",
       "format_version": "0.2.0",
       "contents": "json file to describe an pH Sensor on an Argo float for sensor schema vxx.xx.xx draft",
-      "sensor_described": "SBS-SEAFET-11341"
+      "sensor_described": "SBE-SEAFET-11341"
     },
     "@context": {
       "SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",
