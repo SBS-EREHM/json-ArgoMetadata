@@ -34,11 +34,47 @@
             "required": [
                 "created_by",
                 "date_creation",
+                "link",
                 "format_version",
                 "contents",
                 "float_described"
             ]
         }, 
+        "@context": {
+            "type": "object",
+            "properties": {
+                "SDN:R01::": { "const": "http://vocab.nerc.ac.uk/collection/R01/current/" },
+                "SDN:R03::": { "const": "http://vocab.nerc.ac.uk/collection/R03/current/" },
+                "SDN:R08::": { "const": "http://vocab.nerc.ac.uk/collection/R08/current/" },
+                "SDN:R09::": { "const": "http://vocab.nerc.ac.uk/collection/R09/current/" },
+                "SDN:R10::": { "const": "http://vocab.nerc.ac.uk/collection/R10/current/" },
+                "SDN:R22::": { "const": "http://vocab.nerc.ac.uk/collection/R22/current/" },
+                "SDN:R23::": { "const": "http://vocab.nerc.ac.uk/collection/R23/current/" },
+                "SDN:R24::": { "const": "http://vocab.nerc.ac.uk/collection/R24/current/" },
+                "SDN:R25::": { "const": "http://vocab.nerc.ac.uk/collection/R25/current/" },
+                "SDN:R26::": { "const": "http://vocab.nerc.ac.uk/collection/R26/current/" },
+                "SDN:R27::": { "const": "http://vocab.nerc.ac.uk/collection/R27/current/" },
+                "SDN:R28::": { "const": "http://vocab.nerc.ac.uk/collection/R28/current/" }
+
+            },
+            "required": [
+                "SDN:R01::",
+                "SDN:R03::",
+                "SDN:R08::",
+                "SDN:R09::",
+                "SDN:R10::",                
+                "SDN:R22::",
+                "SDN:R23::",
+                "SDN:R24::",
+                "SDN:R25::",
+                "SDN:R26::",
+                "SDN:R27::",
+                "SDN:R28::"
+            ],
+            "additionalProperties": false
+        },
+
+
         "platform_info" : { 
             "$ref": "./argo.platform.schema.json#/properties/platform_info"
         },
