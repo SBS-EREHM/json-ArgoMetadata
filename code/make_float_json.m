@@ -4,6 +4,7 @@
 % The script will manage cases whrere a sensor or parameter are repeated
 % In that case, a suffix will be chosen and added to the sensor and
 % parameter names for that file
+clear;
 
 float_id = 'SBE-NAVIS_EBR-1101'; % root name for a float definition text file and json output file
 def_file_in = ['floatdef-' float_id '.txt']; % this is a plain text list of json file names, which defines the float and its sensors
@@ -179,6 +180,8 @@ for kl = 1:num_sensorfiles
     % add a new unique suffix for this file
     S = js.SENSORS;
     P = js.PARAMETERS;
+    SS = {}
+    PP = {}
     if isstruct(S)
         for ks = 1:length(S)
             SS{ks, 1} = S(ks);

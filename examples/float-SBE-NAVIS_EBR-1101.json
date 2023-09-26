@@ -1,7 +1,7 @@
 {
   "float_info": {
     "created_by": "BAK test",
-    "date_creation": "2023-09-26T06:43:53Z",
+    "date_creation": "2023-09-26T08:15:22Z",
     "format_version": "0.2.0",
     "link": "./argo.float.schema.json",
     "contents": "json file to describe a platform with sensors for Argo",
@@ -170,57 +170,11 @@
       }
     },
     {
-      "SENSOR": "SDN:R25::CTD_TEMP_CNDC2",
-      "SENSOR_MAKER": "SDN:R26::RBR",
-      "SENSOR_MODEL": "SDN:R27::RBR_ARGO3",
-      "SENSOR_SERIAL_NO": "205908",
-      "SENSOR_FIRMWARE_VERSION": " ",
-      "sensor_vendorinfo": {
-        "vendor_schema": "None",
-        "example": "Vendors can add their own sensor info here; they can add any field they like as a fieldname below sensor_vendorinfo"
-      }
-    },
-    {
-      "SENSOR": "SDN:R25::OPTODE_DOXY3",
+      "SENSOR": "SDN:R25::OPTODE_DOXY",
       "SENSOR_MAKER": "SDN:R26::AANDERAA",
       "SENSOR_MODEL": "SDN:R27::AANDERAA_OPTODE_4330",
       "SENSOR_SERIAL_NO": "3901",
       "SENSOR_FIRMWARE_VERSION": " "
-    },
-    {
-      "SENSOR": "SDN:R25::CTD_TEMP3",
-      "SENSOR_MAKER": "SDN:R26::SBE",
-      "SENSOR_MODEL": "SDN:R27::SBE41CP",
-      "SENSOR_SERIAL_NO": "11643",
-      "SENSOR_FIRMWARE_VERSION": " ",
-      "sensor_vendorinfo": {
-        "vendor_schema": "SBE",
-        "version": "0.1",
-        "SBE_manufacturing_date": "2022-01-01"
-      }
-    },
-    {
-      "SENSOR": "SDN:R25::CTD_CNDC3",
-      "SENSOR_MAKER": "SDN:R26::SBE",
-      "SENSOR_MODEL": "SDN:R27::SBE41CP",
-      "SENSOR_SERIAL_NO": "11643",
-      "SENSOR_FIRMWARE_VERSION": " ",
-      "sensor_vendorinfo": {
-        "vendor_schema": "SBE",
-        "version": "0.1",
-        "SBE_manufacturing_date": "2022-01-01"
-      }
-    },
-    {
-      "SENSOR": "SDN:R25::CTD_TEMP_CNDC3",
-      "SENSOR_MAKER": "SDN:R26::RBR",
-      "SENSOR_MODEL": "SDN:R27::RBR_ARGO3",
-      "SENSOR_SERIAL_NO": "205908",
-      "SENSOR_FIRMWARE_VERSION": " ",
-      "sensor_vendorinfo": {
-        "vendor_schema": "None",
-        "example": "Vendors can add their own sensor info here; they can add any field they like as a fieldname below sensor_vendorinfo"
-      }
     }
   ],
   "PARAMETERS": [
@@ -409,8 +363,8 @@
       }
     },
     {
-      "PARAMETER": "SDN:R03::C1PHASE_DOXY3",
-      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY3",
+      "PARAMETER": "SDN:R03::C1PHASE_DOXY",
+      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY",
       "PARAMETER_UNITS": "degree",
       "PARAMETER_ACCURACY": " ",
       "PARAMETER_RESOLUTION": " ",
@@ -420,8 +374,8 @@
       "PREDEPLOYMENT_CALIB_DATE": " "
     },
     {
-      "PARAMETER": "SDN:R03::C2PHASE_DOXY3",
-      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY3",
+      "PARAMETER": "SDN:R03::C2PHASE_DOXY",
+      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY",
       "PARAMETER_UNITS": "degree",
       "PARAMETER_ACCURACY": " ",
       "PARAMETER_RESOLUTION": " ",
@@ -431,8 +385,8 @@
       "PREDEPLOYMENT_CALIB_DATE": " "
     },
     {
-      "PARAMETER": "SDN:R03::TEMP_DOXY3",
-      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY3",
+      "PARAMETER": "SDN:R03::TEMP_DOXY",
+      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY",
       "PARAMETER_UNITS": "degC",
       "PARAMETER_ACCURACY": "0.03",
       "PARAMETER_RESOLUTION": "0.01",
@@ -449,8 +403,8 @@
       "PREDEPLOYMENT_CALIB_DATE": "2020-01-01"
     },
     {
-      "PARAMETER": "SDN:R03::DOXY3",
-      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY3",
+      "PARAMETER": "SDN:R03::DOXY",
+      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY",
       "PARAMETER_UNITS": "umol/kg",
       "PARAMETER_ACCURACY": "8 umol/kg or 10%",
       "PARAMETER_RESOLUTION": "1 umol/kg",
@@ -494,8 +448,8 @@
       }
     },
     {
-      "PARAMETER": "SDN:R03::PPOX_DOXY3",
-      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY3",
+      "PARAMETER": "SDN:R03::PPOX_DOXY",
+      "PARAMETER_SENSOR": "SDN:R25::OPTODE_DOXY",
       "PARAMETER_UNITS": "mbar",
       "PARAMETER_ACCURACY": " ",
       "PARAMETER_RESOLUTION": " ",
