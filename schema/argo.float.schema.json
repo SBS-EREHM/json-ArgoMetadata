@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "./argo.float.schema.json",
+    "title": "JSON Schema for Argo Program float = platform + sensors",
+    "description": "A JSON Schema used to describe an Argo float including its sensors.  See Argo User's Manual. Metada format Version 3.41.1",
+    "format_version": {
+        "const": "0.2.0"
+    },
+    "type": "object",
+    "properties": {
+        "float_info": {
+            "type": "object",
+            "properties": {
+                "created_by": {
+                    "type": "string"
+                },
+                "date_creation": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "link": {
+                    "const": "./argo.float.schema.json"
+                },
+                "format_version": {
+                    "$ref": "#/format_version"
+                },
+                "contents": {
+                    "type": "string"
+                },
+                "float_described": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "created_by",
+                "date_creation",
+                "format_version",
+                "contents",
+                "float_described"
+            ]
+        }, 
+        "platform_info" : { 
+            "$ref": "./argo.platform.schema.json#/properties/platform_info"
+        },
+        "files_appended" : {
+            "type" : "array",
+            "items" : {
+                "type" : "string"
+            }
+        },
+        "PLATFORM" : { "$ref": "./argo.platform.schema.json#/properties/PLATFORM"},
+        "sensor_info" : {
+            "type" : "array",
+            "items" : {
+                "$ref": "./argo.sensor.schema.json#/properties/sensor_info" 
+            }
+        },
+        "SENSORS" : { "$ref": "./argo.sensor.schema.json#/properties/SENSORS"},
+        "PARAMETERS" : { "$ref" : "./argo.sensor.schema.json#/properties/PARAMETERS" }
+    }
+}
