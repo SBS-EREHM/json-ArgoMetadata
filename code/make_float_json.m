@@ -180,8 +180,8 @@ for kl = 1:num_sensorfiles
     % add a new unique suffix for this file
     S = js.SENSORS;
     P = js.PARAMETERS;
-    SS = {}
-    PP = {}
+    SS = {};
+    PP = {};
     if isstruct(S)
         for ks = 1:length(S)
             SS{ks, 1} = S(ks);
@@ -360,8 +360,8 @@ function jsp_with_context = insert_context(jsp)
 context = [char(9) '"@context": {' char(10) char(9) char(9) '"SDN:R01::": "http://vocab.nerc.ac.uk/collection/R01/current/",' char(10) char(9) char(9) '"SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",' char(10) char(9) char(9) '"SDN:R08::": "http://vocab.nerc.ac.uk/collection/R08/current/",' char(10) char(9) char(9) '"SDN:R09::": "http://vocab.nerc.ac.uk/collection/R09/current/",' char(10) char(9) char(9) '"SDN:R10::": "http://vocab.nerc.ac.uk/collection/R10/current/",' char(10) char(9) char(9) '"SDN:R22::": "http://vocab.nerc.ac.uk/collection/R22/current/",' char(10) char(9) char(9) '"SDN:R23::": "http://vocab.nerc.ac.uk/collection/R23/current/",' char(10) char(9) char(9) '"SDN:R24::": "http://vocab.nerc.ac.uk/collection/R24/current/",' char(10) char(9) char(9) '"SDN:R25::": "http://vocab.nerc.ac.uk/collection/R25/current/",' char(10) char(9) char(9) '"SDN:R26::": "http://vocab.nerc.ac.uk/collection/R26/current/",' char(10) char(9) char(9) '"SDN:R27::": "http://vocab.nerc.ac.uk/collection/R27/current/",' char(10) char(9) char(9) '"SDN:R28::": "http://vocab.nerc.ac.uk/collection/R28/current/"' char(10) char(9) '},' char(10)];
 key = '  "platform_info"';
 
-iplat = findstr(jsp, key)
-jsp_with_context = [jsp(1:iplat-1) context jsp(iplat:end)]
+iplat = findstr(jsp, key);
+jsp_with_context = [jsp(1:iplat-1) context jsp(iplat:end)];
 
 return
 end
