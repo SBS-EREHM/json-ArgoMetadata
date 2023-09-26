@@ -19,9 +19,11 @@ SCHEMAS = Path("/Users/ericrehm/src/SeaBird/json-ArgoMetadata/schema")
 def load_json(file_path):
     return json.loads(file_path.read_text())
     
-def resolve_references(schema, base_uri):
+def resolve_references():
+    '''Resolve references ($ref) in the main and sub schemas'''
 
-    '''Retrieve schema from files system'''
+    # This implementation retrieves schemas from filelocal  system
+    
     # To retrieve via HTTP:
     # 1. See https://python-jsonschema.readthedocs.io/en/v4.19.1/referencing/#the-store-argument
     # amd retrieve_via_httpx below
@@ -44,8 +46,9 @@ def retrieve_via_httpx(uri: str):
     response = httpx.get(uri)
     return Resource.from_contents(response.json())
     
-def validate_data(data, schema, resolver):
-    validator = jsonschema.Draft7Validator(schema, registry=resolver)
+def validate_data(data, schema):
+    registry = resolve_references()
+    validator = jsonschema.Draft7Validator(schema, registry=registry)
 
     try :
         validator.validate(data)
@@ -167,8 +170,9 @@ class NVS :
 
 
 def main():
+    '''Validate a Argo JSON instance (SENSOR, PLATFORM, FLOAT) against schema and NVS controlled vocabularies'''
 
-    '''get file to validate from command line if it's there'''
+    # get file to validate from command line if it's there
     if (len(sys.argv) == 2):
         fname = sys.argv[1]
     else:
@@ -179,10 +183,10 @@ def main():
         # fname = 'examples/sensor-SATLANTIC-SUNA-1527.json'
         # fname = 'examples/sensor-WETLABS-ECO_FLBBCD-3666.json'
         # fname = 'examples/sensor-SBE-SEAFET-11341.json'
-        fname = 'examples/platform-SBE-NAVIS_EBR-1101.json'
-        # fname = 'examples/float-SBE-NAVIS_EBR-1101.json'
+        # fname = 'examples/platform-SBE-NAVIS_EBR-1101.json'
+        fname = 'examples/float-SBE-NAVIS_EBR-1101.json'
         
-    # Load JSON sensor instance data and main schema
+    # Load JSON sensor instance data 
     data_dir = Path.cwd() 
     fpath = data_dir / Path(fname)
     try :
@@ -192,6 +196,7 @@ def main():
         exit()
     print(fpath)
 
+    # Load root JSON schema that applies to this JSON instance
     schema_dir = Path.cwd() / Path('schema')
     schema_type = fpath.name.split('-')[0]
     schema_path = schema_dir / Path('argo.'+f'{schema_type}'+'.schema.json')
@@ -200,17 +205,11 @@ def main():
     except Exception as error:
         print(error)
         exit()
-    print(schema_path)
     
-    # main_schema = load_json(schema_dir / Path('argo.platform.schema.json'))
-
-    # Resolve references ($ref) in the main and sub schemas
-    # The main schema may reference subschemas, etc.
-    base_uri = 'file://' + str(schema_dir) + '/'
-    resolver = resolve_references(main_schema, base_uri)
+    print(schema_path)
 
     # Validate data (instance) against the resolved main schema.  
-    validation_errors = validate_data(data, main_schema, resolver)
+    validation_errors = validate_data(data, main_schema)
     if validation_errors:
         print("Validation errors:")
         for error in validation_errors:
@@ -225,12 +224,13 @@ def main():
         # Use json pointer notation, e.g., /SENSORS/SENSOR, /SENSORS/SENSOR_MAKER, ...
         nvs = NVS(data, clearCache = False)
 
-        # Quick and dirty check against Argo metadta sections with NVS controlled vocabularies.
+        # Check against Argo metadata properties with NVS controlled vocabularies.
+        # Not elegant, but it works.
         if 'SENSORS' in data :
             if nvs.validate("/SENSORS", ['SENSOR', 'SENSOR_MAKER', 'SENSOR_MODEL']) :
                 print("All controlled terms in SENSORS are valid")
             else:
-                print("One or more controlled terms in SENSRare invalid or could not be resolved")
+                print("One or more controlled terms in SENSORS are invalid or could not be resolved")
 
         if 'PARAMETERS' in data :                         
             if nvs.validate("/PARAMETERS", ['PARAMETER', 'PARAMETER_SENSOR']) :
@@ -248,14 +248,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# https://python-jsonschema.readthedocs.io/en/stable/referencing/
-#
-# from referencing import Registry, Resource
-# from referencing.jsonschema import DRAFT202012
-# from referencing.jsonschema import DRAFT7
-# 
-# # schema = Resource(contents={"type": "integer"}, specification=DRAFT202012)
-# registry = Registry().with_resource(uri="http://example.com/my/schema", resource=schema)
-# print(registry)
-# print(registry.contents("http://example.com/my/schema"))
