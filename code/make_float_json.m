@@ -347,9 +347,9 @@ fclose(fid);
 
 
 % Gross Hack to insert @context element.
-% Better would have been to merge the @context array items from the
-% platform JSON instanceand any sensor JSON instance
-% But MATLAB can jsondecode / jsonencode JSON properties that begin with an 
+% Better would have been to dynamically merge the @context array items from 
+% the platform JSON instance and any one sensor JSON instance
+% But MATLAB cannot jsondecode / jsonencode JSON properties that begin with an 
 % "@" symbol (trying to follow jsonld here)
 
 function jsp_with_context = insert_context(jsp)
