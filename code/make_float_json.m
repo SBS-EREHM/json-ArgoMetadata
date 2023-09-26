@@ -339,7 +339,26 @@ allout.PARAMETERS = PARAMETERS;
 jsp = jsonencode(allout,'PrettyPrint',true);
 jsp_struct = jsondecode(jsp);
 jsp2 = jsonencode(jsp_struct,'PrettyPrint',true);
+jsp3 = insert_context(jsp2);
 
 fid = fopen(def_file_ot,'w');
-fprintf(fid,'%s\n',jsp2);
+fprintf(fid,'%s\n',jsp3);
 fclose(fid);
+
+
+% Gross Hack to insert @context element.
+% Better would have been to merge the @context array items from the
+% platform JSON instanceand any sensor JSON instance
+% But MATLAB can jsondecode / jsonencode JSON properties that begin with an 
+% "@" symbol (trying to follow jsonld here)
+
+function jsp_with_context = insert_context(jsp)
+
+context = [char(9) '"@context": {' char(10) char(9) char(9) '"SDN:R01::": "http://vocab.nerc.ac.uk/collection/R01/current/",' char(10) char(9) char(9) '"SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",' char(10) char(9) char(9) '"SDN:R08::": "http://vocab.nerc.ac.uk/collection/R08/current/",' char(10) char(9) char(9) '"SDN:R09::": "http://vocab.nerc.ac.uk/collection/R09/current/",' char(10) char(9) char(9) '"SDN:R10::": "http://vocab.nerc.ac.uk/collection/R10/current/",' char(10) char(9) char(9) '"SDN:R22::": "http://vocab.nerc.ac.uk/collection/R22/current/",' char(10) char(9) char(9) '"SDN:R23::": "http://vocab.nerc.ac.uk/collection/R23/current/",' char(10) char(9) char(9) '"SDN:R24::": "http://vocab.nerc.ac.uk/collection/R24/current/",' char(10) char(9) char(9) '"SDN:R25::": "http://vocab.nerc.ac.uk/collection/R25/current/",' char(10) char(9) char(9) '"SDN:R26::": "http://vocab.nerc.ac.uk/collection/R26/current/",' char(10) char(9) char(9) '"SDN:R27::": "http://vocab.nerc.ac.uk/collection/R27/current/",' char(10) char(9) char(9) '"SDN:R28::": "http://vocab.nerc.ac.uk/collection/R28/current/"' char(10) char(9) '},' char(10)];
+key = '  "platform_info"';
+
+iplat = findstr(jsp, key)
+jsp_with_context = [jsp(1:iplat-1) context jsp(iplat:end)]
+
+return
+end
