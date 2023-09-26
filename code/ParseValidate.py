@@ -9,50 +9,58 @@ from pathlib import Path
 from urllib.parse import urlparse
 from dataclasses import dataclass
 from typing import ClassVar
+from referencing import Registry
+from referencing.jsonschema import DRAFT7
+from referencing import Resource
+
+# Path to schemas on local filesystem
+SCHEMAS = Path("/Users/ericrehm/src/SeaBird/json-ArgoMetadata/schema")
 
 def load_json(file_path):
     return json.loads(file_path.read_text())
     
 def resolve_references(schema, base_uri):
 
-    # jsonschema.RefResolver magically handles nested $ref in a Schema tree relative to the base_uri.
-    # In this case, we have the following nested $refs
-    #   argo.sensor.schema.json
-    #        argo.vendors.schema.json
-    #             argo.SBE.schema.json
-    #             argo.RBR.schema.json
-    #             ...
-    #
-    # However, RefResolver has been deprecated in favor of JSON (Schema) Referencing API (package referencing).
-    # Sadly, the Referencing documentation is sketchy, not all examples work, and it appears
-    # you have to register all of your subschema *prior* to validation.  This would be bad, as it would 
-    # create a dependency between validation code and the abovementioned conditionally referenced subschemas.
-    # (via jsonschema "allOf" "if" ... "then"; see argo.vendors.schema.json).  It could be that I 
-    # just don't know how to encode the $ref's so that subschemas can be automatically referenced.  Not sure.
-    # https://python-jsonschema.readthedocs.io/en/stable/validate/
-    # https://python-jsonschema.readthedocs.io/en/stable/referencing/
-    # So, I will leave to someone more talented than I to make the transition from RefResolver
-    # to the Referencing API.
+    '''Retrieve schema from files system'''
+    # To retrieve via HTTP:
+    # 1. See https://python-jsonschema.readthedocs.io/en/v4.19.1/referencing/#the-store-argument
+    # amd retrieve_via_httpx below
+    # 2. Modify base URL all $ref properties in all Argo schemas
+    #    e.g., {"$ref" : "./argo.platform.schema.json"} -->  {"$ref" : "https://json.schemastore.org/argo.platform.schema.json"}
 
-    resolver = jsonschema.RefResolver(base_uri, schema)
-    return resolver
+    registry = Registry(retrieve = retrieve_from_filesystem)
+    # registry = Registry(retrieve = retrieve_via_httpx)
+    return registry
 
+def retrieve_from_filesystem(uri: str):
+    '''Retrieve schemas from filesystem based on hard-coded path'''
+    path = SCHEMAS / Path(uri.removeprefix("./"))
+    contents = json.loads(path.read_text())
+    return Resource.from_contents(contents)
+
+import httpx
+def retrieve_via_httpx(uri: str):
+    '''Retrieve schemas via HTTP'''
+    response = httpx.get(uri)
+    return Resource.from_contents(response.json())
+    
 def validate_data(data, schema, resolver):
-    validator = jsonschema.Draft7Validator(schema, resolver=resolver)
+    validator = jsonschema.Draft7Validator(schema, registry=resolver)
 
-    # try :
-    #     validator.validate(data)
-    # except jsonschema.exceptions.ValidationError as error:
-    #     pass
-    # except jsonschema.exceptions.SchemaError as error:
-    #     print("SchemaError")
-    #     return [error]
-    # except jsonschema.exceptions.UnknownType as error:
-    #     print("UnknownType")
-    #     return [error]
-    # except jsonschema.exceptions.UndefinedTypeCheck as error:
-    #     print("UndefinedTypeCheck")
-    #     return [error]
+    try :
+        validator.validate(data)
+    except jsonschema.exceptions.ValidationError as error:
+        pass
+        # print(error)
+    except jsonschema.exceptions.SchemaError as error:
+        print("SchemaError")
+        return [error]
+    except jsonschema.exceptions.UnknownType as error:
+        print("UnknownType")
+        return [error]
+    except jsonschema.exceptions.UndefinedTypeCheck as error:
+        print("UndefinedTypeCheck")
+        return [error]
 
     errors = list(validator.iter_errors(data))
     return errors
@@ -160,7 +168,7 @@ class NVS :
 
 def main():
 
-    # get file to validate from command line if it's there
+    '''get file to validate from command line if it's there'''
     if (len(sys.argv) == 2):
         fname = sys.argv[1]
     else:
@@ -172,6 +180,7 @@ def main():
         # fname = 'examples/sensor-WETLABS-ECO_FLBBCD-3666.json'
         # fname = 'examples/sensor-SBE-SEAFET-11341.json'
         fname = 'examples/platform-SBE-NAVIS_EBR-1101.json'
+        # fname = 'examples/float-SBE-NAVIS_EBR-1101.json'
         
     # Load JSON sensor instance data and main schema
     data_dir = Path.cwd() 
