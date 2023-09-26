@@ -189,5 +189,13 @@
             "additionalProperties": false,
             "uniqueItems" : true
         }
-    }
+    },
+    "required": [
+        "@context",
+        "platform_info",
+        "PLATFORM"
+    ],
+    "uniqueItems": true,
+    "additionalProperties": false
+
 }
