@@ -100,7 +100,7 @@
         },
         "PLATFORM" : { 
             "$ref": "./argo.platform.schema.json#/properties/PLATFORM",
-            "description": "Schema-valid PLATFORM metadata instance, typicall from JSON PLATFORM file."
+            "description": "Schema-valid PLATFORM metadata instance, typically from JSON PLATFORM file."
         },
         "SENSORS" : { 
             "$ref": "./argo.sensor.schema.json#/properties/SENSORS",
