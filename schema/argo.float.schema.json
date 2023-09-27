@@ -79,16 +79,16 @@
             ],
             "additionalProperties": false
         },
-        "platform_info" : { 
-            "$ref": "./argo.platform.schema.json#/properties/platform_info",
-            "description": "Schema-valid platform metadata instance, typically from JSON PLATFORM file"
-        },
         "files_appended" : {
             "type" : "array",
             "items" : {
                 "type" : "string"
             },
             "description": "Array of one platform JSON filename and multiple sensors JSON filename merged to create this JSON float metadata resource"
+        },
+        "platform_info" : { 
+            "$ref": "./argo.platform.schema.json#/properties/platform_info",
+            "description": "Schema-valid platform metadata instance, typically from JSON PLATFORM file"
         },
         "sensor_info" : {
             "type" : "array",
@@ -108,7 +108,7 @@
         },
         "PARAMETERS" : { 
             "$ref" : "./argo.sensor.schema.json#/properties/PARAMETERS",
-            "description": "Array of schema-valid PLATFORM metadata instances corresponding to SENSORS above.  Typically from JSON SENSOR files."
+            "description": "Array of schema-valid PARAMETER metadata instances corresponding to SENSORS above.  Typically from JSON SENSOR files."
         }
     }
 }
