@@ -132,11 +132,12 @@
                         "type": "string"
                     },
                     "PREDEPLOYMENT_CALIB_EQUATION": {
-                        "type": "string"
+                        "type": "string",
+                        "description" : "Calibration equation for this parameter."
                     },
                     "PREDEPLOYMENT_CALIB_COEFFICIENT_LIST": {
-                        "description": "Calibation coefficients are listed individually here, string-encoded to guarantee precision.  They will be compiled to create the Argo PREDEPLOYMENT_CALIB_COEFFCIENT string",
-                        "type": "object"
+                        "type": "object",
+                        "description" : "Calibation coefficients are listed individually here, string-encoded to guarantee precision.  They will be compiled to create the Argo PREDEPLOYMENT_CALIB_COEFFCIENT string"
                     },
                     "PREDEPLOYMENT_CALIB_COMMENT": {
                         "type": "string"
