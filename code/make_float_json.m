@@ -53,7 +53,7 @@ raw = fread(fid,inf);
 fclose(fid);
 
 str = char(raw(:)');
-jsplat = jsondecode(str);
+jsplat = jsondecodeEx(str);
 float_described = jsplat.platform_info.platform_described; % the present logic is that the 'platform' is the hull, and the 'float' is the platform+sensors
 
 
@@ -89,9 +89,15 @@ for kl = 1:num_sensorfiles
     fid = fopen(fnin,'r');
     raw = fread(fid,inf);
     fclose(fid);
+    
+    % Decode the JSON file into MATLAB structures
+    %
+    % jsondecodeEx() forces cell arrays for SENSORS, PARAMETERS so that 
+    % each SENSOR or PARAMETER can have varying content (e.g.,
+    % sensor_vendorinfo)
 
     str = char(raw(:)');
-    js = jsondecode(str);
+    js = jsondecodeEx(str);  
 
     % keep a note of the length of the sensor and parameter names as read
     % in, to use when looking for multiple sensors
@@ -103,9 +109,10 @@ end
 
 fprintf(1,'\n');
 
+% For debugging; not used later
 platformfields = fieldnames(jsplat.PLATFORM);
-sensorfields = fieldnames(jsall{1}.SENSORS);
-parameterfields = fieldnames(jsall{1}.PARAMETERS);
+sensorfields = fieldnames(jsall{1}.SENSORS{1});
+parameterfields = fieldnames(jsall{1}.PARAMETERS{1});
 
 % At this point, we expect the following fields to be present
 % platformfields =
@@ -124,12 +131,14 @@ parameterfields = fieldnames(jsall{1}.PARAMETERS);
 %     {'CONTROLLER_BOARD_SERIAL_NO_PRIMARY'  }
 %     {'CONTROLLER_BOARD_TYPE_SECONDARY'     }
 %     {'CONTROLLER_BOARD_SERIAL_NO_SECONDARY'}
+%     Optional {'platform_vendorinfo'}
 % sensorfields =
 %     {'SENSOR'          }
 %     {'SENSOR_MAKER'    }
 %     {'SENSOR_MODEL'    }
 %     {'SENSOR_SERIAL_NO'}
 %     {'SENSOR_FIRMWARE' }
+%     Optional {'sensor_vendorinfo'}
 % parameterfields =
 %     {'PARAMETER'                       }
 %     {'PARAMETER_SENSOR'                }
@@ -141,15 +150,17 @@ parameterfields = fieldnames(jsall{1}.PARAMETERS);
 %     {'PREDEPLOYMENT_CALIB_COEFFICIENTS'}
 %     {'PREDEPLOYMENT_CALIB_COMMENT'     }
 %     {'PREDEPLOYMENT_CALIB_DATE'        }
+%     Optional {'parameter_vendorinfo'}
+%     Optional {'predeployment_vendorinfo'}
+%     Optional {'instrument_vendorinfo'}
 
-% now append all the sensor and parameter definitions
+% now merge all the sensor and parameter definitions
 %
 % If there is only one input file, no appending is needed
 %
 % If there are multiple sensor and parameter names that haven't already been
 % taken care of by defining a suffix at the inpuut stage, take care of that
 % below
-
 
 clear SENSORS PARAMETERS
 SENSORS = []; % empty to start with
@@ -173,31 +184,15 @@ for kl = 1:num_sensorfiles
         paramnames = [paramnames {PARAMETERS{kp}.PARAMETER}];
     end
 
-
-
     js = jsall{kl}; % This is the new file definition being added
     % if any of the SENSORs or PARAMETERs already exist, we will need to
     % add a new unique suffix for this file
+
     S = js.SENSORS;
     P = js.PARAMETERS;
-    SS = {};
-    PP = {};
-    if isstruct(S)
-        for ks = 1:length(S)
-            SS{ks, 1} = S(ks);
-        end
-        S = SS;
-    end
-    if isstruct(P)
-        for kp = 1:length(P)
-            PP{kp,1} = P(kp);
-        end
-        P = PP;
-    end
 
     numnew_s = length(S); % the number of sensors and parameters to be added from this file
     numnew_p = length(P);
-
 
     % This section of code should find the highest previous suffix for
     % either sensor or parameter names, and increase it by 1 if needed.
@@ -312,50 +307,55 @@ for kl = 1:num_sensorfiles
 end
 
 clear allout info
-% Add any metadata about the json file
 
+% Add any metadata about the float json file
 info.created_by = created_by;
-% info.date_creation = datestr(now,'yyyy-mm-ddTHH:MM:SSZ'); % use ISO / RFC 3339 format
 info.date_creation = string(datetime('now', 'TimeZone', 'Z', 'Format','yyyy-MM-dd''T''hh:mm:ss'))+"Z";
-info.format_version = '0.2.0'; % for some sort of version control
+info.format_version = '0.2.0'; % schema version
 info.link = './argo.float.schema.json';
 info.contents = 'json file to describe a platform with sensors for Argo';
 info.float_described = float_described;
 
-
-allout.float_info = info;
-allout.platform_info = jsplat.platform_info;
-sensor_info = [];
-files_appended = fn_platform(1);
+% Create sensor_info_list as unique name from sensor_info so there's no
+% confusion
+sensor_info_list = [];
+files_merged = fn_platform(1);
 for kl = 1:num_sensorfiles
-    sensor_info = [sensor_info ; jsall{kl}.sensor_info];
-    files_appended = [files_appended ; fn_sensors{kl}];
+    sensor_info_list = [sensor_info_list ; jsall{kl}.sensor_info];
+    files_merged = [files_merged ; fn_sensors{kl}];
 end
 
-allout.sensor_info = sensor_info;
-allout.files_appended = files_appended;
+% Meta metadata
+allout.float_info = info;
+allout.files_merged = files_merged;
+allout.platform_info = jsplat.platform_info;
+allout.sensor_info_list = sensor_info_list;
+
+% Platform and sensor metadata
 allout.PLATFORM = jsplat.PLATFORM;
 allout.SENSORS = SENSORS;
 allout.PARAMETERS = PARAMETERS;
 
-
-jsp = jsonencode(allout,'PrettyPrint',true);
-jsp_struct = jsondecode(jsp);
-jsp2 = jsonencode(jsp_struct,'PrettyPrint',true);
+% Encode it
+jsp = jsonencodeEx(allout,'PrettyPrint',true);
+jsp_struct = jsondecodeEx(jsp);
+jsp2 = jsonencodeEx(jsp_struct,'PrettyPrint',true);
 jsp3 = insert_context(jsp2);
 
+% Write out float JSON metadata file
 fid = fopen(def_file_ot,'w');
 fprintf(fid,'%s\n',jsp3);
 fclose(fid);
 
+
+
+function jsp_with_context = insert_context(jsp)
 
 % Gross Hack to insert @context element.
 % Better would have been to dynamically merge the @context array items from 
 % the platform JSON instance and any one sensor JSON instance
 % But MATLAB cannot jsondecode / jsonencode JSON properties that begin with an 
 % "@" symbol (trying to follow jsonld here)
-
-function jsp_with_context = insert_context(jsp)
 
 context = [char(9) '"@context": {' char(10) char(9) char(9) '"SDN:R01::": "http://vocab.nerc.ac.uk/collection/R01/current/",' char(10) char(9) char(9) '"SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",' char(10) char(9) char(9) '"SDN:R08::": "http://vocab.nerc.ac.uk/collection/R08/current/",' char(10) char(9) char(9) '"SDN:R09::": "http://vocab.nerc.ac.uk/collection/R09/current/",' char(10) char(9) char(9) '"SDN:R10::": "http://vocab.nerc.ac.uk/collection/R10/current/",' char(10) char(9) char(9) '"SDN:R22::": "http://vocab.nerc.ac.uk/collection/R22/current/",' char(10) char(9) char(9) '"SDN:R23::": "http://vocab.nerc.ac.uk/collection/R23/current/",' char(10) char(9) char(9) '"SDN:R24::": "http://vocab.nerc.ac.uk/collection/R24/current/",' char(10) char(9) char(9) '"SDN:R25::": "http://vocab.nerc.ac.uk/collection/R25/current/",' char(10) char(9) char(9) '"SDN:R26::": "http://vocab.nerc.ac.uk/collection/R26/current/",' char(10) char(9) char(9) '"SDN:R27::": "http://vocab.nerc.ac.uk/collection/R27/current/",' char(10) char(9) char(9) '"SDN:R28::": "http://vocab.nerc.ac.uk/collection/R28/current/"' char(10) char(9) '},' char(10)];
 key = '  "platform_info"';
