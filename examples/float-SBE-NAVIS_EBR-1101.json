@@ -1,12 +1,18 @@
 {
   "float_info": {
     "created_by": "BAK test",
-    "date_creation": "2023-09-26T08:17:17Z",
+    "date_creation": "2023-09-27T06:23:12Z",
     "format_version": "0.2.0",
     "link": "./argo.float.schema.json",
     "contents": "json file to describe a platform with sensors for Argo",
     "float_described": "SBE-NAVIS_EBR-1101"
   },
+  "files_merged": [
+    "platform-SBE-NAVIS_EBR-1101.json",
+    "sensor-RBR-RBR_ARGO3-205908.json",
+    "sensor-SBE-SBE41CP-11643.json",
+    "sensor-AANDERAA-AANDERAA_OPTODE_4330-3901.json"
+  ],
 	"@context": {
 		"SDN:R01::": "http://vocab.nerc.ac.uk/collection/R01/current/",
 		"SDN:R03::": "http://vocab.nerc.ac.uk/collection/R03/current/",
@@ -29,7 +35,7 @@
     "contents": "json file to describe a platform for Argo",
     "platform_described": "SBE-NAVIS_EBR-1101"
   },
-  "sensor_info": [
+  "sensor_info_list": [
     {
       "created_by": "BAK test",
       "date_creation": "2023-02-03T07:38:07Z",
@@ -54,12 +60,6 @@
       "contents": "json file to describe a sensor for Argo. v0.1 draft",
       "sensor_described": "AANDERAA-AANDERAA_OPTODE_4330-3901"
     }
-  ],
-  "files_appended": [
-    "platform-SBE-NAVIS_EBR-1101.json",
-    "sensor-RBR-RBR_ARGO3-205908.json",
-    "sensor-SBE-SBE41CP-11643.json",
-    "sensor-AANDERAA-AANDERAA_OPTODE_4330-3901.json"
   ],
   "PLATFORM": {
     "DATA_TYPE": "SDN:R01::META",
