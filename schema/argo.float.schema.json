@@ -12,23 +12,29 @@
             "type": "object",
             "properties": {
                 "created_by": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The entity primarily responsible for making the content of this JSON metadata resource"
                 },
                 "date_creation": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "description": "Date and time of creation of the resource.  RFC 3339 format compliant with ISO 8601"
                 },
                 "link": {
-                    "const": "./argo.float.schema.json"
+                    "const": "./argo.float.schema.json",
+                    "description": "Link to JSON Schema that validates this JSON metadata resource"
                 },
                 "format_version": {
-                    "$ref": "#/format_version"
+                    "$ref": "#/format_version",
+                    "description": "Schema version for this resource. Must match /format_version."
                 },
                 "contents": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of this JSON metadata respirce."
                 },
                 "float_described": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Identification of float described by this JSON metadata resouce: Ideally: float-<PLATFORM_VENDOR>-<FLOAT_SERIAL_NUMBER>."
                 }
             },
             "required": [
@@ -55,8 +61,8 @@
                 "SDN:R26::": { "const": "http://vocab.nerc.ac.uk/collection/R26/current/" },
                 "SDN:R27::": { "const": "http://vocab.nerc.ac.uk/collection/R27/current/" },
                 "SDN:R28::": { "const": "http://vocab.nerc.ac.uk/collection/R28/current/" }
-
             },
+            "description": "Mapping from SDN NVS term IDs to validation URL.  Must be present in JSON float metadata resource.",
             "required": [
                 "SDN:R01::",
                 "SDN:R03::",
@@ -73,25 +79,36 @@
             ],
             "additionalProperties": false
         },
-
-
         "platform_info" : { 
-            "$ref": "./argo.platform.schema.json#/properties/platform_info"
+            "$ref": "./argo.platform.schema.json#/properties/platform_info",
+            "description": "Schema-valid platform metadata instance, typically from JSON PLATFORM file"
         },
         "files_appended" : {
             "type" : "array",
             "items" : {
                 "type" : "string"
-            }
+            },
+            "description": "Array of one platform JSON filename and multiple sensors JSON filename merged to create this JSON float metadata resource"
         },
-        "PLATFORM" : { "$ref": "./argo.platform.schema.json#/properties/PLATFORM"},
         "sensor_info" : {
             "type" : "array",
             "items" : {
                 "$ref": "./argo.sensor.schema.json#/properties/sensor_info" 
-            }
+            },
+            "description": "Array of schema-valid sensor_info metadata instances, typically from JSON SENSOR files."
+
         },
-        "SENSORS" : { "$ref": "./argo.sensor.schema.json#/properties/SENSORS"},
-        "PARAMETERS" : { "$ref" : "./argo.sensor.schema.json#/properties/PARAMETERS" }
+        "PLATFORM" : { 
+            "$ref": "./argo.platform.schema.json#/properties/PLATFORM",
+            "description": "Schema-valid PLATFORM metadata instance"
+        },
+        "SENSORS" : { 
+            "$ref": "./argo.sensor.schema.json#/properties/SENSORS",
+            "description": "Array of schema-valid SENSOR metadata instances, typically from JSON SENSOR files."
+        },
+        "PARAMETERS" : { 
+            "$ref" : "./argo.sensor.schema.json#/properties/PARAMETERS",
+            "description": "Array of schema-valid PLATFORM metadata instances corresponding to SENSORS above.  Typically from JSON SENSOR files."
+        }
     }
 }
